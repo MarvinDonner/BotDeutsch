@@ -21,8 +21,14 @@ client.on('message', (message) => {
     }
 
     //Text-To-Speach Message
-    if (message.content === '!code') {
+    if (message.content === '!say') {
         message.author.send('/tts' + message.toString.substring(6, (message.toString.length + 1)));
         return;
     }
+
+    //Role administation
+
+
+    //Mini Game
+    
 });

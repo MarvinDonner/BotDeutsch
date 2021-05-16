@@ -20,8 +20,9 @@ client.on('message', (message) => {
                             "!code              - Zeigt ein GitHub Respository in dem der Code des Bots hinterlegt ist \n" + 
                             "!say               - Liest eine Nachicht laut vor (TTS) \n" + 
                             "!role *rollenname* - Vergibt die Rolle die dahinter beschrieben wird \n" + 
+                            "                       Rollen: Role1, Role2, RickRole \n" + 
                             "!game              - Spiele ein kleines 'Konsolenspiel'" + 
-                            "!cmd   !help       - Zeigt alle validen Befehle an")
+                            "!cmd   !help       - Zeigt alle validen Befehle an");
     }
 
     //Code request
@@ -38,7 +39,24 @@ client.on('message', (message) => {
 
     //Role administation
     if (message.content.startsWith('!role')) {
-        var vSplit = message.content.substring(6)
+        var vSplit = message.content.substring(6);
+
+        //Set Role1
+        if (vSplit === "Role1") {
+            var vRole = message.member.guild.roles.find(r => r.name == "Role1");
+            message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
+        }
+        //Set Role2
+        if (vSplit === "Role2") {
+            var vRole = message.member.guild.roles.find(r => r.name == "Role2");
+            message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
+        }
+        //Make RickRole
+        if (vSplit === "RickRole") {
+            var vRole = message.member.guild.roles.find(r => r.name == "RickRole");
+            message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
+            message.author.send("/giphy query: rickrole")
+        }
         // message.guild.roles.
         return;
     }

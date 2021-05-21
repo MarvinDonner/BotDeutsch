@@ -1,5 +1,6 @@
 //Client declaration
-    const { Client, User } = require('discord.js');
+    require('dotenv').config();
+    const { Client, Message, GuildManager, GuildMember } = require('discord.js');
     const client = new Client();
 
 //Login
@@ -14,26 +15,31 @@
 client.on('message', (message) => {
     if (message.author.bot) return;
 
+    console.log(`[${message.author.tag}]: ${message.content}`);
+
     //Command llist
     if (message.content.startsWith("!cmd") || message.content.startsWith("!help")) {
-        message.author.send("Folgende Befehle kannst du verwenden: \n" + 
+        message.channel.send("Folgende Befehle kannst du verwenden: \n" + 
                             "!code              - Zeigt ein GitHub Respository in dem der Code des Bots hinterlegt ist \n" + 
                             "!say               - Liest eine Nachicht laut vor (TTS) \n" + 
                             "!role *rollenname* - Vergibt die Rolle die dahinter beschrieben wird \n" + 
                             "                       Rollen: Role1, Role2, RickRole \n" + 
-                            "!game              - Spiele ein kleines 'Konsolenspiel'" + 
+                            "!calc              - Berechnet eine kleine Matheaufgabe der Form: \n" + 
+                            "                       x + y ; x - y ; x * y ; x / y \n" + 
                             "!cmd   !help       - Zeigt alle validen Befehle an");
     }
 
     //Code request
     if (message.content.startsWith('!code')) {
-        message.author.send('Hier findest du meinen Quellcode: https://github.com/MarvinDonner/BotDeutsch');
+        message.channel.send('Hier findest du meinen Quellcode: https://github.com/MarvinDonner/BotDeutsch');
         return;
     }
 
     //Text-To-Speach Message
     if (message.content.startsWith('!say')) {
-        message.author.send('/tts' + message.toString.substring(6, (message.toString.length + 1)));
+        message.channel.send(message.toString().substring(4), {
+            tts: true
+           });
         return;
     }
 
@@ -43,8 +49,12 @@ client.on('message', (message) => {
 
         //Set Role1
         if (vSplit === "Role1") {
-            var vRole = message.member.guild.roles.find(r => r.name == "Role1");
-            message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
+            //var vRole = message.member.guild.roles.find(r => r.name == "Role1");
+            //message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
+            //var role= member.guild.roles.cache.find(role => role.name === "Role1");
+            // var role = message.guild.roles.find(role => role.name === "Role1");
+            var role = message.member.roles.cache.find(role => role.name === "Role1");
+            message.member.guild.roles.add(role);
         }
         //Set Role2
         if (vSplit === "Role2") {
@@ -53,17 +63,37 @@ client.on('message', (message) => {
         }
         //Make RickRole
         if (vSplit === "RickRole") {
-            var vRole = message.member.guild.roles.find(r => r.name == "RickRole");
-            message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
-            message.author.send("/giphy query: rickrole")
+            // var vRole = message.member.guild.roles.find(r => r.name == "RickRole");
+            // message.member.setNickname(`${pres[role.id]} ${message.member.displayName}`)
+            message.channel.send("/giphy query: rickrole")
         }
-        // message.guild.roles.
+        // message.guild.roles
         return;
     }
 
     //Mini Game
-    if (message.content.startsWith('!game')) {
-        
+    if (message.content.startsWith('!calc')) {
+        var parts = message.content.substring(" ");
+        if(parts[2] = "+") {
+            var result = parts[1](parsed);
+            result += parts[3](parsed);
+            message.channel.send("Das Ergebnis deiner Addition lautet: " + result);
+        }
+        if(parts[2] = "*") {
+            var result = parts[1](parsed);
+            result *= parts[3](parsed);
+            message.channel.send("Das Ergebnis deiner Multipkikation lautet: " + result);
+        }
+        if(parts[2] = "-") {
+            var result = parts[1](parsed);
+            result -= parts[3](parsed);
+            message.channel.send("Das Ergebnis deiner Subtraktion lautet: " + result);
+        }
+        if(parts[2] = "/") {
+            var result = parts[1](parsed);
+            result /= parts[3](parsed);
+            message.channel.send("Das Ergebnis deiner Division lautet: " + result);
+        }
         return;
     }
 });

@@ -1,5 +1,5 @@
 {
-  "name": "BotDeutsch",
+  "name": "Deutsch-Bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "dev": "nodemon ./src/bot.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Marvin Donner",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.3",

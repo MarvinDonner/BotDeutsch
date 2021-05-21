@@ -73,26 +73,31 @@ client.on('message', (message) => {
 
     //Mini Game
     if (message.content.startsWith('!calc')) {
-        var parts = message.content.substring(" ");
+        var parts = message.content.split(" ");
         if(parts[2] = "+") {
-            var result = parts[1](parsed);
-            result += parts[3](parsed);
-            message.channel.send("Das Ergebnis deiner Addition lautet: " + result);
+            console.log(parts[1])
+            var result = parseInt(parts[1], 10);
+            result += parseInt(parts[3], 10);
+            message.channel.send("Das Ergebnis deiner Addition lautet: " + result.toString());
+            return;
         }
         if(parts[2] = "*") {
-            var result = parts[1](parsed);
-            result *= parts[3](parsed);
-            message.channel.send("Das Ergebnis deiner Multipkikation lautet: " + result);
+            var result = parseInt(parts[1], 10);
+            result *= parseInt(parts[3], 10);
+            message.channel.send("Das Ergebnis deiner Multipkikation lautet: " + result.toString());
+            return;
         }
         if(parts[2] = "-") {
-            var result = parts[1](parsed);
-            result -= parts[3](parsed);
-            message.channel.send("Das Ergebnis deiner Subtraktion lautet: " + result);
+            var result = parseInt(parts[1], 10);
+            result -= parseInt(parts[3], 10);
+            message.channel.send("Das Ergebnis deiner Subtraktion lautet: " + result.toString());
+            return;
         }
         if(parts[2] = "/") {
-            var result = parts[1](parsed);
-            result /= parts[3](parsed);
-            message.channel.send("Das Ergebnis deiner Division lautet: " + result);
+            var result = parseInt(parts[1], 10);
+            result /= parseInt(parts[3], 10);
+            message.channel.send("Das Ergebnis deiner Division lautet: " + result.toString());
+            return;
         }
         return;
     }

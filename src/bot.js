@@ -40,11 +40,7 @@ client.on('message', (message) => {
            });
         return;
     }
-
-    //Role administation
-    if (message.content.startsWith('!role')) {
-        var vSplit = message.content.substring(6);
-
+    
     //Calculating of Math
     if (message.content.startsWith('!calc')) {
         var parts = message.content.split(" ");
@@ -75,4 +71,4 @@ client.on('message', (message) => {
         }
         return;
     }
-});
+    })
